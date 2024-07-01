@@ -35,6 +35,9 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: Column(),
       ),
+      bottomSheet: TextField(
+        keyboardType: TextInputType.text,
+      ),
     );
   }
 }

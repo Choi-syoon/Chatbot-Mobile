@@ -10,6 +10,15 @@ class Application extends StatefulWidget{
 }
 
 class _ApplicationState extends State<Application>{
+
+  final _promptTextEditController = TextEditingController();
+
+  @override
+  void dispose() {
+    _promptTextEditController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context){
     return MaterialApp(
@@ -24,13 +33,17 @@ class _ApplicationState extends State<Application>{
       bottomSheet: Padding(
         padding: const EdgeInsets.all(16.0),
         child: TextField(
+          controller: _promptTextEditController,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20.0),
             ),
-            labelText: "Prompt"
+            labelText: "Prompt",
           ),
+          onChanged: (text) {
+            print(text);
+          },
         ),
       )
       )

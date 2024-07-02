@@ -42,7 +42,7 @@ class _ApplicationState extends State<Application>{
             labelText: "Prompt",
           ),
           onChanged: (text) {
-            print(text);
+            var _promptTextArray = text;
           },
         ),
       )

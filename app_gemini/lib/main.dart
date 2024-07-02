@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';  // Flutter imports
 
 void main() {
   runApp(const MyApp());
@@ -35,9 +36,18 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: Column(),
       ),
-      bottomSheet: TextField(
-        keyboardType: TextInputType.text,
-      ),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: TextField(
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            labelText: "Prompt"
+          ),
+        ),
+      )
     );
   }
 }

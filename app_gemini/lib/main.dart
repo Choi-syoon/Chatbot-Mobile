@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 void main() {
   runApp(Application());
@@ -24,7 +25,7 @@ class _ApplicationState extends State<Application> {
 
   void _sendPrompt() async {
     final model = GenerativeModel(
-        model: 'gemini-pro', apiKey: 'api_key'); // Model Settings
+        model: 'gemini-pro', apiKey: ''); // Model Settings
 
     String promptText = _promptTextEditController.text;
     if (promptText.isNotEmpty) {
@@ -77,10 +78,19 @@ class _ApplicationState extends State<Application> {
                           color: isUser ? Colors.blue[100] : Colors.grey[300],
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Text(
-                          isUser ? message['user']! : message['gemini']!,
-                          style: TextStyle(fontSize: 16),
-                        ),
+                        child: isUser
+                            ? Text(
+                                message['user']!,
+                                style: TextStyle(fontSize: 16),
+                              )
+                            : MarkdownBody(
+                                data: message['gemini']!,
+                                styleSheet: MarkdownStyleSheet.fromTheme(
+                                  Theme.of(context),
+                                ).copyWith(
+                                  p: TextStyle(fontSize: 16),
+                                ),
+                              ),
                       ),
                     );
                   },

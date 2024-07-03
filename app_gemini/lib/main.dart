@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 
 void main() {
   runApp(Application());
@@ -16,6 +19,22 @@ class _ApplicationState extends State<Application> {
   void dispose() {
     _promptTextEditController.dispose();
     super.dispose();
+  }
+
+  void _sendPrompt() async {
+    final model = GenerativeModel(
+        model: 'gemini-pro', apiKey: 'api-key'); // Model Settings
+
+    String promptText = _promptTextEditController.text;
+    if (promptText.isNotEmpty) {
+      final content = [Content.text(promptText)];
+      try {
+        final response = await model.generateContent(content);
+        print(response.text);
+      } catch (e) {
+        print('Exception: $e');
+      }
+    }
   }
 
   @override
@@ -48,11 +67,7 @@ class _ApplicationState extends State<Application> {
               ),
               SizedBox(width: 10),
               ElevatedButton(
-                onPressed: () {
-                  // Handle send button press
-                  String promptText = _promptTextEditController.text;
-                  print('Send button pressed with text: $promptText');
-                },
+                onPressed: _sendPrompt,
                 child: Text("Send"),
               ),
             ],

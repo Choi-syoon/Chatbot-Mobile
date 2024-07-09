@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 void main() {
@@ -60,7 +59,7 @@ class _ApplicationState extends State<Application> {
                                 style: TextStyle(fontSize: 16),
                               )
                             : MarkdownBody(
-                                data: message['ChatGPT']!,
+                                data: message['gemini']!,
                                 styleSheet: MarkdownStyleSheet.fromTheme(
                                   Theme.of(context),
                                 ).copyWith(
